@@ -5,11 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:DataToDocx"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="http://schemas.modernwpf.com/2019"
     Title="邮件合并"
-    Width="800"
-    Height="600"
-    ui:WindowHelper.UseModernWindowStyle="True"
+    Width="600"
+    Height="360"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
@@ -20,19 +18,28 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock
+                                x:Name="MainTableName"
                                 Width="80"
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 Text="主数据表" />
-                            <TextBox Width="120" Margin="5" />
+                            <TextBox
+                                x:Name="MainTableExcelSource"
+                                Width="120"
+                                Margin="5" />
                             <Button
+                                x:Name="MainTableExcelChoose"
                                 Width="100"
                                 Margin="5"
+                                Click="MainTableExcelChoose_Click"
                                 Content="选择文件" />
                             <Button
+                                x:Name="MainTableExcelUpload"
                                 Width="100"
                                 Margin="5"
+                                Click="MainTableExcelUpload_Click"
                                 Content="导入数据库" />
+                            <Label x:Name="MainTableState" Margin="5" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock
@@ -60,7 +67,52 @@
             </TabItem>
             <TabItem Header="模版编辑" />
             <TabItem Header="预览和批量生成">
-                <RichTextBox />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel
+                        Grid.Row="0"
+                        Margin="5"
+                        Orientation="Vertical">
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <TextBlock Margin="5" Text="筛选字段" />
+                            <ComboBox MinWidth="100" Margin="5" />
+                            <TextBlock Margin="5" Text="=" />
+                            <TextBox
+                                x:Name="textBox_zhen"
+                                Width="50"
+                                Margin="5" />
+                        </StackPanel>
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <TextBlock Margin="5" Text="筛选字段" />
+                            <ComboBox MinWidth="100" Margin="5" />
+                            <TextBlock
+                                x:Name="textBox_cun"
+                                Margin="5"
+                                Text="=" />
+                            <TextBox Width="50" Margin="5" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1">
+
+                        <Button
+                            x:Name="StartCreate"
+                            Width="120"
+                            Click="StartCreate_Click"
+                            Content="批量生成" />
+                        <Label x:Name="label_count" MinWidth="100" />
+                        <RichTextBox
+                            x:Name="RTB_log"
+                            MinHeight="120"
+                            VerticalAlignment="Stretch" />
+                    </StackPanel>
+                </Grid>
+
+
             </TabItem>
         </TabControl>
     </Grid>
